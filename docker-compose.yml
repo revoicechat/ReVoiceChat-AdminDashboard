@@ -1,0 +1,14 @@
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: revoicechat_admin_dashboard
+    ports:
+      - "5001:5001"
+    volumes:
+      - ./www:/usr/share/nginx/html
+    restart: unless-stopped
+networks:
+  default:
+    name: app-network

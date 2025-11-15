@@ -5,7 +5,7 @@ services:
       dockerfile: Dockerfile
     container_name: revoicechat_admin_dashboard
     ports:
-      - "5001:5001"
+      - "${WEB_ADMIN_PORT:-5001}:5001"
     volumes:
       - ./www:/usr/share/nginx/html
     restart: unless-stopped

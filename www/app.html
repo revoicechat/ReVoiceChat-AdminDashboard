@@ -14,81 +14,78 @@
 
 <body>
     <!-- Config Containter -->
+  <div class="menu">
+    <div class="menu-list">
+      <div>
+        <button class="sub-category" id="server-setting-tab-overview">
+          <revoice-icon-information></revoice-icon-information> Overview
+        </button>
+      </div>
+      <div>
+        <button class="sub-category" id="server-setting-tab-members">
+          <revoice-icon-users></revoice-icon-users> Members
+        </button>
+      </div>
+    </div>
+    <div>
+      <button class="sub-category danger" id="user-setting-tab-logout">
+        <revoice-icon-logout></revoice-icon-logout>
+        Logout
+      </button>
+    </div>
+  </div>
     <div class="main config" id="route-config">
-        <div class="config-container-left">
-            <div class="config-left">
-                <div class="category">
-                    <h2>Admin dashboard</h2>
-
-                    <!-- Overview -->
-                    <button class="sub-category" id="server-setting-tab-overview">
-                        <revoice-icon-information></revoice-icon-information> Overview
-                    </button>
-
-                    <!-- Rooms -->
-                    <button class="sub-category" id="server-setting-tab-servers">
-                        <revoice-icon-server-stack></revoice-icon-server-stack> Servers
-                    </button>
-
-                    <!-- Emotes -->
-                    <button class="sub-category" id="server-setting-tab-emotes">
-                        <revoice-icon-emoji></revoice-icon-emoji> Emotes
-                    </button>
-
-                    <!-- Members -->
-                    <button class="sub-category" id="server-setting-tab-members">
-                        <revoice-icon-users></revoice-icon-users> Members
-                    </button>
-
-                    <!-- Invitation -->
-                    <button class="sub-category" id="server-setting-tab-invitations">
-                        <revoice-icon-envelope></revoice-icon-envelope> Invitations
-                    </button>
-                </div>
-
-                <!-- Logout -->
-                <div class="category">
-                    <button class="sub-category danger" id="user-setting-tab-logout">
-                        <revoice-icon-logout></revoice-icon-logout>
-                        Logout
-                    </button>
-                </div>
-            </div>
-        </div>
-
         <div class="config-container-right">
-            <div class="config-right">
+            <div>
+                <br />
+                <h1>Admin dashboard</h1>
                 <!-- Overview -->
                 <div class="hidden" id="server-setting-content-overview">
-                    <h1>Overview</h1>
+                    <div class="side-overview-dashboard">
+                        <div class="overview-dashboard vertical">
+                          <div class="card" id="server-setting-content-servers">
+                          <h2>Servers</h2>
 
+                        </div>
+
+                        <div class="card" id="server-setting-content-technical-parameters">
+                          <h2>Technical parameters</h2>
+
+                        </div>
+                      </div>
+
+                      <div class="overview-dashboard vertical">
+                        <div class="card vertical" id="server-setting-content-emotes">
+                          <h2>Emotes</h2>
+                          <revoice-emoji-manager path="application" id="setting-emotes-form"></revoice-emoji-manager>
+                        </div>
+                      </div>
+                    </div>
                 </div>
 
-                <!-- Servers -->
-                <div class="hidden" id="server-setting-content-servers">
-                    <h1>Servers</h1>
+              <div class="hidden" id="server-setting-content-members">
+                <div class="side-overview-dashboard">
+                  <div class="overview-dashboard vertical">
+                    <div class="card" id="server-setting-content-users">
+                      <h2>Users</h2>
+                      <div id="server-setting-users" class="config-members-list"></div>
+                    </div>
 
+                    <div class="card" id="server-setting-content-admins">
+                      <h2>Admins</h2>
+                      <div id="server-setting-admins" class="config-members-list"></div>
+                    </div>
+                  </div>
+                  <div class="overview-dashboard vertical">
+                    <div class="card vertical" id="server-setting-content-invitations">
+                      <h2>Invitations</h2>
+                      <button id='server-setting-invitation-create'>New invitation</button>
+                      <br /><br />
+                      <div id="server-setting-invitation" class="config-invitation-list"></div>
+                    </div>
+                  </div>
                 </div>
-
-                <!-- Emotes -->
-                <div class="hidden" id="server-setting-content-emotes">
-                    <h1>Emotes</h1>
-                    <revoice-emoji-manager path="application" id="setting-emotes-form"></revoice-emoji-manager>
-                </div>
-
-                <!-- Members -->
-                <div class="hidden" id="server-setting-content-members">
-                    <h1>Members</h1>
-                    <div id="server-setting-members" class="config-members-list"></div>
-                </div>
-
-                <!-- Invitations -->
-                <div class="hidden" id="server-setting-content-invitations">
-                    <h1>Invitations</h1>
-                    <button id='server-setting-invitation-create'>New invitation</button>
-                    <br /><br />
-                    <div id="server-setting-invitation" class="config-invitation-list"></div>
-                </div>
+              </div>
             </div>
         </div>
     </div>

@@ -514,7 +514,6 @@ class EmojiManager extends HTMLElement {
 
                 .emoji-list {
                     background-color: var(--sec-bg-color);
-                    border: 1px solid var(--pri-bd-color);
                     border-radius: 0.25rem;
                     padding: 1.5rem;
                 }

@@ -51,10 +51,6 @@ body {
     background-color: var(--pri-bg-color);
 }
 
-.config-container-right {
-    background-color: var(--sec-bg-color);
-}
-
 .config .sub-category:hover {
     background-color: var(--pri-hover-color);
 }

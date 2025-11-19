@@ -18,7 +18,7 @@ export default class ReVoiceChatAdmin {
     }
 
     #selectEventHandler() {
-        const parameters = ['overview', 'servers', 'emotes', 'members', 'invitations'];
+        const parameters = ['overview', 'members'];
         for (const param of parameters) {
             document.getElementById(`server-setting-tab-${param}`).addEventListener('click', () => this.#select(param));
         }

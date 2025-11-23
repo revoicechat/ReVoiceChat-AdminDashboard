@@ -1,4 +1,4 @@
-export default class Fetcher {
+class Fetcher {
     #coreURL;
     #mediaURL;
     #token;
@@ -76,3 +76,5 @@ export default class Fetcher {
         }
     }
 }
+
+module.exports = Fetcher;

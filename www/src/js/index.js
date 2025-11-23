@@ -1,9 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
-    // Set theme
-    document.documentElement.dataset.theme = localStorage.getItem("Theme") || "dark";
-
     autoHost();
-
     // Last login
     if (localStorage.getItem("lastUsername")) {
         document.getElementById("username").value = localStorage.getItem("lastUsername");

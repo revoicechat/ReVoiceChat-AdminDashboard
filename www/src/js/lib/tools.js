@@ -72,3 +72,11 @@ function fallbackCopyToClipboard(data) {
     document.execCommand("copy"); // NOSONAR - it is a fallback method
     input.remove();
 }
+
+module.exports = {
+    SwalCustomClass,
+    setCookie,
+    getCookie,
+    eraseCookie,
+    copyToClipboard
+};

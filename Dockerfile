@@ -1,4 +1,4 @@
-FROM nginx:alpine
+FROM nginxinc/nginx-unprivileged:alpine
 
 COPY ./www /usr/share/nginx/html
 EXPOSE 5001

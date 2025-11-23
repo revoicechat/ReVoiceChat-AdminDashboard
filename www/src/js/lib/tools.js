@@ -55,28 +55,20 @@ async function copyToClipboard(data) {
     try {
         if (navigator.clipboard) {
             await navigator.clipboard.writeText(data);
-        }
-        else {
-            // Fallback
-            const input = document.createElement('input');
-            input.id = 'input-copy'
-            input.value = data;
-            document.body.appendChild(input);
-            document.getElementById('input-copy').select();
-            document.execCommand("copy");
-            input.remove();
+        } else {
+            fallbackCopyToClipboard(data)
         }
     } catch (err) {
         console.error('copyToClipboard: Failed to copy:', err);
     }
 }
 
-/**
- * Fetch wrapper for Tauri
- * @param url
- * @param options
- * @returns function to use
- */
-async function apiFetch(url, options = {}) {
-    return fetch(url, options);
+function fallbackCopyToClipboard(data) {
+    const input = document.createElement('input');
+    input.id = 'input-copy'
+    input.value = data;
+    document.body.appendChild(input);
+    document.getElementById('input-copy').select();
+    document.execCommand("copy"); // NOSONAR - it is a fallback method
+    input.remove();
 }

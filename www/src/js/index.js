@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
     // Set theme
-    document.documentElement.setAttribute("data-theme", localStorage.getItem("Theme") || "dark");
+    document.documentElement.dataset.theme = localStorage.getItem("Theme") || "dark";
 
     autoHost();
 

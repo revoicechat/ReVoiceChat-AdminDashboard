@@ -118,10 +118,15 @@ input:where([type=submit]) {
 
 .config button {
     background-color: var(--pri-button-bg-color);
+    display: flex;
 }
 
 .config button[disabled], .config button:hover {
     background-color: var(--pri-button-hover-color);
+}
+
+.config button svg {
+    margin-right: 0.5rem;
 }
 
 :-moz-focusring {
@@ -530,14 +535,6 @@ svg {
     height: 100%;
 }
 
-.config button {
-    display: flex;
-}
-
-.config button svg {
-    margin-right: 0.5rem;
-}
-
 .config .category h2 {
     min-height: 2.5rem;
     font-weight: 800;
@@ -862,7 +859,7 @@ input[type=file]::file-selector-button {
 
 .menu .sub-category.danger:hover{
     background-color: darkred;
-    color: #ff1f1f;
+    color: white;
 }
 
 .card-list {

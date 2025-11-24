@@ -23,8 +23,7 @@ function userLogin() {
     try {
         const inputHost = new URL(FORM.host.value);
         login(LOGIN, inputHost.origin);
-    }
-    catch (e) {
+    } catch (e) {
         Swal.fire({
             icon: 'error',
             title: `Unable to login`,
@@ -38,62 +37,51 @@ function userLogin() {
     }
 }
 
-async function login(loginData, host) {
-    try {
-        const response = await fetch(`${host}/api/auth/login`, {
-            cache: "no-store",
-            signal: AbortSignal.timeout(5000),
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            method: 'POST',
-            body: JSON.stringify(loginData),
+function login(loginData, host) {
+    fetch(`${host}/api/auth/login`, {
+        cache: "no-store",
+        signal: AbortSignal.timeout(5000),
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        method: 'POST',
+        body: JSON.stringify(loginData),
+    })
+        .catch(error => loginError(host, error))
+        .then(async response => {
+            if (response.ok) {
+                const jwtToken = await response.text();
+                localStorage.setItem("lastHost", host);
+                localStorage.setItem("lastUsername", loginData.username);
+                setCookie('jwtToken', jwtToken, 1);
+                document.location.href = `app.html`;
+            } else {
+                const error = await response.text();
+                loginError(host, error)
+            }
         });
+}
 
-        if (!response.ok) {
-            throw new Error("Not OK");
-        }
-
-        // Local storage
-        localStorage.setItem("lastHost", host);
-        localStorage.setItem("lastUsername", loginData.username);
-
-        const jwtToken = await response.text();
-        setCookie('jwtToken', jwtToken, 1);
-        document.location.href = `app.html`;
-    }
-    catch (error) {
-        console.log(error);
-        Swal.fire({
-            icon: "error",
-            title: `Unable to connect to\n ${host}`,
-            error: error,
-            focusConfirm: false,
-            allowOutsideClick: false,
-            animation: false,
-            customClass: {
-                title: "swalTitle",
-                popup: "swalPopup",
-                cancelButton: "swalCancel",
-                confirmButton: "swalConfirm",
-            },
-        })
-    }
+function loginError(host, error) {
+    console.log(error);
+    Swal.fire({
+        icon: "error",
+        title: `Unable to connect to\n ${host}`,
+        error: error,
+        focusConfirm: false,
+        allowOutsideClick: false,
+        animation: false,
+        customClass: {
+            title: "swalTitle",
+            popup: "swalPopup",
+            cancelButton: "swalCancel",
+            confirmButton: "swalConfirm",
+        },
+    })
 }
 
 function autoHost() {
-    switch (document.location.origin) {
-        case "https://dev.revoicechat.fr":
-            document.getElementById("login-form").host.value = "https://dev.revoicechat.fr";
-            break;
-
-        case "https://app.revoicechat.fr":
-            document.getElementById("login-form").host.value = "https://app.revoicechat.fr";
-            break;
-        default:
-            if (localStorage.getItem("lastHost")) {
-                document.getElementById("login-form").host.value = localStorage.getItem("lastHost");
-            }
-            break;
-    }
+    document.getElementById("login-form").host.value = localStorage.getItem("lastHost")
+        ? localStorage.getItem("lastHost")
+        : document.location.origin;
 }

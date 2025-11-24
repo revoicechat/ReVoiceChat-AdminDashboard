@@ -1,4 +1,4 @@
-class User {
+export class User {
   constructor(RVCA) {
     this.RVCA = RVCA
   }
@@ -12,5 +12,3 @@ class User {
     }
   }
 }
-
-module.exports = { User }

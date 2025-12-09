@@ -1,5 +1,6 @@
-# ReVoiceChat-AdminDashboard
-bah ... c'est l'admin dashboard quoi
+# RevoiceChat - Admin Dashboard
+
+[<img src="logo.png" width="30"/>](.idea/icon.svg)  ![RevoiceChat](https://img.shields.io/badge/RevoiceChat-Admin%20Dashboard-5E8C61?style=for-the-badge)
 
 ## License
 

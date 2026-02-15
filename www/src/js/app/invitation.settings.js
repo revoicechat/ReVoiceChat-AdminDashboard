@@ -17,28 +17,37 @@ export class InvitationSettings {
             const list = document.getElementById("server-setting-invitation");
             list.innerHTML = "";
             for (const invitation of result) {
-                if (invitation.status === 'CREATED') {
-                    const item = this.#invitationCreateItem(invitation)
-                    list.appendChild(item);
-                }
+                list.appendChild(this.#invitationCreateItem(invitation));
             }
         }
     }
 
     async #invitationCreate() {
-        const result = await this.RVCA.fetcher.fetchCore(`/invitation/application`, 'POST');
-        if (result.status === "CREATED") {
-            await this.#invitationLoad();
-            Swal.fire({
-                title: `New invitation`,
-                html: `<input class='swal-input' type='text' value='${result.id}' readonly>`,
-                animation: false,
-                customClass: SwalCustomClass,
-                showCancelButton: false,
-                confirmButtonText: "OK",
-                allowOutsideClick: false,
-            })
-        }
+        let invitationCategory = 'UNIQUE'
+        Swal.fire({
+            title: `New invitation`,
+            html: `
+                <form class='popup'>
+                    <select id='modal-serverId'>
+                        <option value='UNIQUE'    data-i18n="server.invitation.category.unique" selected>unique</option>
+                        <option value='PERMANENT' data-i18n="server.invitation.category.permanent">permanent</option>
+                    </select>
+                </form>`,
+            animation: false,
+            customClass: SwalCustomClass,
+            showCancelButton: false,
+            confirmButtonText: "OK",
+            allowOutsideClick: false,
+            didOpen: async () => {
+                const select = document.getElementById('modal-serverId');
+                select.oninput = () => { invitationCategory = select.value };
+            },
+        }).then(async (result) => {
+            if (result.value) {
+                await this.RVCA.fetcher.fetchCore(`/invitation/application?category=${invitationCategory}`, 'POST');
+                await this.#invitationLoad();
+            }
+        });
     }
 
     #invitationCreateItem(data) {
